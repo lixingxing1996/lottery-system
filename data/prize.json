@@ -3,31 +3,31 @@
         "items": [
             {
                 "name": "冰箱1台",
-                "stock": 1
+                "stock": 0
             }
         ],
-        "total": 1,
+        "total": 0,
         "displayName": "特等奖（1名）"
     },
     "一等奖": {
         "items": [
             {
                 "name": "电视机3台",
-                "stock": 3
+                "stock": 0
             }
         ],
-        "total": 3,
+        "total": 0,
         "displayName": "一等奖（3名）"
     },
     "二等奖": {
         "items": [
             {
                 "name": "洗衣机1台",
-                "stock": 1
+                "stock": 0
             },
             {
                 "name": "咖啡机1个",
-                "stock": 1
+                "stock": 0
             },
             {
                 "name": "自行车1辆",
@@ -54,7 +54,7 @@
                 "stock": 10
             }
         ],
-        "total": 30,
+        "total": 28,
         "displayName": "二等奖（30名）"
     },
     "三等奖": {
@@ -117,22 +117,22 @@
         "items": [
             {
                 "name": "布凳40个",
-                "stock": 40
+                "stock": 0
             },
             {
                 "name": "立白天然洗衣液20个",
-                "stock": 20
+                "stock": 0
             },
             {
                 "name": "乐维诗玻璃吸管杯50个",
-                "stock": 50
+                "stock": 0
             },
             {
                 "name": "凡士林护手霜套装10个",
-                "stock": 10
+                "stock": 0
             }
         ],
-        "total": 120,
+        "total": 0,
         "displayName": "幸运奖（120名）"
     }
-} 
+}
