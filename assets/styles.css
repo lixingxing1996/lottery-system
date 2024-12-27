@@ -1,0 +1,308 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image: url('bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.prize-display {
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    width: 60%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.prize-level {
+    font-size: 36px;
+    color: #e4393c;
+    margin-bottom: 10px;
+}
+
+.prize-name {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.table-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 60%;
+    max-height: 400px;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.settings-btn,
+.export-btn,
+.reset-btn {
+    position: fixed;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 120px;
+    height: 40px;
+    line-height: 20px;
+    transition: all 0.3s ease;
+}
+
+.save-btn.export-btn {
+    top: 20px;
+    background-color: #2196F3;
+}
+
+.save-btn.export-btn:hover {
+    background-color: #1976D2;
+    transform: translateX(-5px);
+}
+
+.reset-btn {
+    top: 70px;
+    background-color: #f44336;
+}
+
+.reset-btn:hover {
+    background-color: #d32f2f;
+    transform: translateX(-5px);
+}
+
+.settings-btn {
+    top: 120px;
+    background-color: #4CAF50;
+}
+
+.settings-btn:hover {
+    background-color: #388E3C;
+    transform: translateX(-5px);
+}
+
+.prize-settings {
+    display: none;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 80%;
+    text-align: left;
+}
+
+.prize-settings h2 {
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+.prize-settings .prize-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.prize-settings .prize-title {
+    color: #e4393c;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.main-content {
+    display: block;
+}
+
+.back-btn {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #666;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.prize-controls {
+    margin-top: 20px;
+}
+
+.prize-controls select {
+    padding: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.draw-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #e4393c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.draw-btn:hover {
+    background-color: #d43235;
+}
+
+.save-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.save-btn:hover {
+    background-color: #1976D2;
+}
+
+.draw-count-container {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.draw-count-container input {
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.stock-info {
+    color: #666;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.page-title {
+    text-align: center;
+    color: #FFD700;
+    font-size: 64px;
+    margin: 32px 0 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    padding: 10px 30px;
+}
+
+.page-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    z-index: -1;
+}
+
+.title-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    background-color: #FFD700;
+    color: #333;
+    padding: 12px 8px;
+    font-weight: bold;
+}
+
+td {
+    padding: 10px 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 15px;
+    background-color: transparent;
+    color: #000000;
+    font-size: 14px;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: -1;
+}
+
+/* 添加闪烁动画 */
+@keyframes flash {
+    0% {
+        background-color: rgba(255, 215, 0, 0.3);
+    }
+    50% {
+        background-color: rgba(255, 215, 0, 0.1);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+/* 添加行动画样式 */
+#winner-list tr {
+    transition: all 0.3s ease;
+}
+
+#winner-list tr.highlight {
+    background-color: rgba(255, 215, 0, 0.2);
+} 

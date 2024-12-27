@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>抽奖平台</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="title-container">
+        <h1 class="page-title">年会抽奖活动</h1>
+    </div>
+
+    <button class="save-btn export-btn" onclick="downloadWinners()">导出名单</button>
+    <button class="reset-btn" onclick="confirmReset()">重置抽奖</button>
+    <button class="settings-btn" onclick="toggleSettings()">奖项设置</button>
+
+    <div class="main-content">
+        <div class="prize-display">
+            <div class="prize-level">抽奖系统</div>
+            <div class="prize-name">欢迎使用</div>
+            <div class="prize-controls">
+                <select id="prizeSelect">
+                    <option value="">请选择奖项</option>
+                </select>
+                <select id="itemSelect" style="display: none;">
+                    <option value="">请选择奖品</option>
+                </select>
+                <div class="draw-count-container">
+                    <input type="number" id="drawCount" min="1" placeholder="抽奖人数">
+                    <span class="stock-info">剩余: <span id="currentStock">0</span></span>
+                </div>
+                <button class="draw-btn" onclick="drawPrize()">开始抽奖</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>工号</th>
+                        <th>姓名</th>
+                        <th>一级部门</th>
+                        <th>奖项</th>
+                        <th>奖品</th>
+                    </tr>
+                </thead>
+                <tbody id="winner-list">
+                    <!-- 中奖者信息会通过JavaScript动态添加 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="prize-settings">
+        <button class="back-btn" onclick="toggleSettings()">返回抽奖页面</button>
+        <h2>奖项设置</h2>
+        <div class="prize-item">
+            <div class="prize-title">特等奖（1名）：</div>
+            <div class="prize-content">冰箱1台</div>
+        </div>
+        <div class="prize-item">
+            <div class="prize-title">一等奖（3名）：</div>
+            <div class="prize-content">电视机3台</div>
+        </div>
+        <div class="prize-item">
+            <div class="prize-title">二等奖（30名）：</div>
+            <div class="prize-content">洗衣机1台，咖啡机1个，自行车1辆，家用投影仪1个，颈椎按摩仪3个，华为智能手表3个，茶机10个，圣贤居豪华套房698元免费入住劵10个</div>
+        </div>
+        <div class="prize-item">
+            <div class="prize-title">三等奖（70名）：</div>
+            <div class="prize-content">养生壶20个，陶晶无烟锅20个，蒸锅10个，圣贤居豪华景观标准间免费入住劵10个，风干鸡礼盒礼品券10个</div>
+        </div>
+        <div class="prize-item">
+            <div class="prize-title">四等奖（90名）：</div>
+            <div class="prize-content">智能垃圾桶20个，平板拖把20个，双肩包10个，乐维诗杯具5件套10个，圣贤居餐饮消费400元代金券10个，圣贤居餐饮消费200元代金券20份</div>
+        </div>
+        <div class="prize-item">
+            <div class="prize-title">幸运奖（120名）：</div>
+            <div class="prize-content">布凳40个，立白天然洗衣液20个，乐维诗玻璃吸杯50个，凡士林护手霜套装10个</div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        技术支持：济南小于号网络科技有限公司
+    </footer>
+
+    <script src="assets/script.js"></script>
+</body>
+</html>

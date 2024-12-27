@@ -24,7 +24,7 @@
 
 1. 克隆仓库到本地：
 ```bash
-git clone https://github.com/yourusername/lottery-system.git
+git clone hhttps://github.com/lixingxing1996/lottery-system.git
 ```
 
 2. 将项目文件放置在 Web 服务器目录下（如 Apache 或 Nginx）
@@ -94,7 +94,7 @@ git clone https://github.com/yourusername/lottery-system.git
 
 ## 界面预览
 
-![抽奖系统界面](path/to/screenshot.png)
+![抽奖系统界面](screenshot.png)
 
 ## 许可证
 
