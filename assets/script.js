@@ -24,7 +24,6 @@ window.addEventListener('load', function() {
             console.log('成功加载教师数据，共' + teachers.length + '条记录');
             // 加载已有的中奖记录
             loadWinners();
-            updateStockDisplay();
             // 更新奖项下拉框
             updatePrizeSelect();
         })
@@ -79,7 +78,6 @@ function updatePrizeSelect() {
     // 重置显示为初始状态
     document.querySelector('.prize-level').textContent = '抽奖系统';
     document.querySelector('.prize-name').textContent = '欢迎使用';
-    document.getElementById('currentStock').textContent = '0';
 }
 
 // 加载已有的中奖记录
@@ -126,17 +124,10 @@ function downloadWinners() {
 function drawPrize() {
     const prizeLevel = document.getElementById('prizeSelect').value;
     const prize = prizeConfig[prizeLevel];
-    const drawCount = parseInt(document.getElementById('drawCount').value);
     
     // 验证选择
     if (!prizeLevel) {
         alert('请选择奖项！');
-        return;
-    }
-    
-    // 验证抽奖数量
-    if (isNaN(drawCount) || drawCount < 1) {
-        alert('请输入有效的抽奖人数！');
         return;
     }
     
@@ -151,10 +142,13 @@ function drawPrize() {
         ? prize.items.find(item => item.name === selectedItemName)
         : prize.items[0];
     
-    if (!selectedItem || selectedItem.stock < drawCount) {
-        alert('该奖品剩余数量不足！');
+    if (!selectedItem || selectedItem.stock === 0) {
+        alert('该奖品已抽完！');
         return;
     }
+
+    // 使用奖品库存作为抽奖人数
+    const drawCount = selectedItem.stock;
     
     // 获取可参与抽奖的教师列表
     const availableTeachers = teachers.filter(teacher => 
@@ -173,17 +167,16 @@ function drawPrize() {
     }
 
     // 开始滚动效果
-    startRolling(availableTeachers);
+    startRolling(availableTeachers, drawCount);
     
     // 更改按钮文字
     document.querySelector('.draw-btn').textContent = '停止抽奖';
 }
 
 // 开始滚动效果
-function startRolling(availableTeachers) {
+function startRolling(availableTeachers, drawCount) {
     isRolling = true;
     const winnerList = document.getElementById("winner-list");
-    const drawCount = parseInt(document.getElementById('drawCount').value);
     
     rollInterval = setInterval(() => {
         // 清空表格
@@ -393,7 +386,6 @@ document.getElementById('prizeSelect').addEventListener('change', function(e) {
         itemSelect.style.display = 'none';
         document.querySelector('.prize-level').textContent = '抽奖系统';
         document.querySelector('.prize-name').textContent = '欢迎使用';
-        document.getElementById('currentStock').textContent = '0';
         return;
     }
     
@@ -410,9 +402,8 @@ document.getElementById('prizeSelect').addEventListener('change', function(e) {
             .forEach(item => {
                 const option = document.createElement('option');
                 option.value = item.name;
-                // 移除数量信息显示简化的奖品名称
                 const displayName = item.name.replace(/\d+个|\d+台|\d+辆|\d+份|\d+张/, '');
-                option.textContent = `${displayName}`;
+                option.textContent = displayName;
                 itemSelect.appendChild(option);
             });
         
@@ -423,13 +414,11 @@ document.getElementById('prizeSelect').addEventListener('change', function(e) {
         // 只有一个奖品时直接显示
         const item = prizeInfo.items[0];
         const displayName = item.name.replace(/\d+个|\d+台|\d+辆|\d+份|\d+张/, '');
-        document.querySelector('.prize-name').textContent = `${displayName}（剩余${item.stock}）`;
+        document.querySelector('.prize-name').textContent = displayName;
     }
-    
-    updateStockDisplay();
 });
 
-// 添加奖品选择变化的处理
+// 修改奖品选择变化的处理
 document.getElementById('itemSelect').addEventListener('change', function(e) {
     const selectedPrize = document.getElementById('prizeSelect').value;
     const selectedItem = e.target.value;
@@ -437,7 +426,6 @@ document.getElementById('itemSelect').addEventListener('change', function(e) {
     
     if (!selectedItem) {
         document.querySelector('.prize-name').textContent = '请选择具体奖品';
-        document.getElementById('currentStock').textContent = '0';
         return;
     }
     
@@ -446,29 +434,9 @@ document.getElementById('itemSelect').addEventListener('change', function(e) {
     
     if (item) {
         const displayName = item.name.replace(/\d+个|\d+台|\d+辆|\d+份|\d+张/, '');
-        document.querySelector('.prize-name').textContent = `${displayName}（剩余${item.stock}）`;
-        document.getElementById('currentStock').textContent = item.stock;
+        document.querySelector('.prize-name').textContent = displayName;
     }
 });
-
-// 添加更新库存显示的函数（如果还没有的话
-function updateStockDisplay() {
-    const selectedPrize = document.getElementById('prizeSelect').value;
-    const prizeInfo = prizeConfig[selectedPrize];
-    
-    // 添加错误检查
-    if (!prizeInfo || !prizeInfo.items) {
-        console.error('无法获取奖项信息:', selectedPrize);
-        document.getElementById('currentStock').textContent = '0';
-        return;
-    }
-    
-    // 计���当前奖项的总剩余数量
-    const remainingStock = prizeInfo.items.reduce((total, item) => total + item.stock, 0);
-    
-    // 更新库存显示
-    document.getElementById('currentStock').textContent = remainingStock;
-}
 
 // 确认重置
 function confirmReset() {
@@ -498,7 +466,6 @@ function resetDrawing() {
         resetPrizeStock();
         // 更新显示
         updateWinnerList();
-        updateStockDisplay();
         // 重置显示的奖项
         document.querySelector('.prize-level').textContent = '抽奖系统';
         document.querySelector('.prize-name').textContent = '欢迎使用';
@@ -521,7 +488,6 @@ function resetPrizeStock() {
                 throw new Error(data.message);
             }
             prizeConfig = data;
-            updateStockDisplay();
         })
         .catch(error => {
             console.error('重置库存失败:', error);
@@ -550,9 +516,6 @@ function updatePrizeStock(prizeLevel, itemName) {
         item.stock--;
         prize.total--;
     }
-    
-    // 更新库存显示
-    updateStockDisplay();
     
     // 将更新后的配置保存到服务器
     fetch('tool/api.php/update_prize_stock', {
